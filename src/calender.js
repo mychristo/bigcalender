@@ -1,10 +1,10 @@
-// import React from 'react';
+
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import './index.css';
 import events from "./events";
 import BigCalendar from "react-big-calendar-like-google";
-import moment from "moment";
+import moment, { now } from "moment";
 import "react-big-calendar-like-google/lib/css/react-big-calendar.css";
 //import * as serviceWorker from './serviceWorker';
 import CalDay from './calendermodal';
@@ -18,37 +18,33 @@ const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
 class Calender extends Component {
   state = {
-    view: "day",
+    view: "month",
     myyear: 2015,
     mymonth: 3,
-    myday: 13,
+    myday: 11,
     //date: new Date(2015, 3, 13),
     width: 700,
     isModalOpen: false 
   };
 
   showDay = () => {
-    //this.setState({ isModalOpen: true });
-    //this.setState({ view: "day", myday: });
     console.log('inside day events');
   }
 
   handleEventClick = (e) => {
-    //const {event} = this.props;
-    //this.props.onSelect(event);
-    var tdate = e.toString();
-    var myDate = new Date(tdate);
-    console.log('event clicked!', myDate.getDate());
-    this.setState({myday: myDate.getDate(), view: "day"});
+    var tday = e.toString();
+    var myDay = new Date(tday);
+
+    console.log('event clicked!', myDay.getMonth());
+    if(this.state.view==="month") {
+    this.setState({myday: myDay.getDate(), mymonth: myDay.getMonth(), view: "day"});
+    }
   };
 
   formatDate = (string) => {
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(string).toLocaleDateString([],options);
    }
-
-  // var dateString = "2018-05-18T04:00:00.000Z"
-  // document.getElementById("results").innerHTML = formatDate(dateString);
 
   componentDidMount() {
     window.addEventListener("resize", () => {
@@ -60,41 +56,28 @@ class Calender extends Component {
   }
 
   render() {
-    console.log('this.state.view: ', this.state.view);
+   // console.log((event) => console.log(event));
 
     return (
       <div style={{ height: 700 }}>
 
         <button onClick={() => this.setState({ view: "month", mymonth: this.state.mymonth - 1 })}>{'<'}</button>
-        <button onClick={() => this.setState({ view: "day" })}>Day</button>
+        {/* <button onClick={() => this.setState({ view: "day" })}>Day</button> */}
         <button onClick={() => this.setState({ view: "month" })}>Month</button>
         <button onClick={() => this.setState({ view: "month", mymonth: this.state.mymonth + 1 })}>{'>'}</button>
 
         <BigCalendar
           selectable={true}
           events={events}
-          //views={["month"]}
+          //view={["month"]}
           view={this.state.view}
           style={{ height: 500, width: this.state.width }}
           onView={() => {}}
           //date={this.state.date}
           date={new Date(this.state.myyear, this.state.mymonth, this.state.myday)}
           onNavigate={date => this.setState({ date })}
-          //onClick={console.log('inside click event')}
-          //onSelectEvent={event => this.showDay}
           onSelectEvent={this.showDay}
-          //onSelectSlot={this.handleEventClick(event)}
-          //onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-         // onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-          //onSelectSlot={(event) => this.handleEventClick(this.formatDate(event.slots))}
-          onSelectSlot={(event) => this.handleEventClick(event.slots)}
-
-          // onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-         // onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-
-          //onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-         // onSelectSlot={(event) => this.setState({day: this.formatDate(event.slots)})}
-          //eventPropGetter={(this.eventStyleGetter)}
+          onSelectSlot={(event) => this.handleEventClick(event.slots, event)}
         />
             {/* <BigCalendar
               events={events}
