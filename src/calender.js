@@ -62,6 +62,7 @@ class Calender extends Component {
           selectable={true}
           events={events}
           views={["month"]}
+          //views={[this.state.view]}
           style={{ height: 500, width: this.state.width }}
           onView={() => {}}
           //date={this.state.date}
