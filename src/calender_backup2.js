@@ -33,22 +33,12 @@ class Calender extends Component {
     console.log('inside day events');
   }
 
-  handleEventClick = (e) => {
+  handleEventClick = () => {
     //const {event} = this.props;
     //this.props.onSelect(event);
-    var tdate = e.toString();
-    var myDate = new Date(tdate);
-    console.log('event clicked!', myDate.getDate());
-    this.setState({myday: myDate.getDate(), view: "day"});
+    console.log('event clicked!');
+
   };
-
-  formatDate = (string) => {
-    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(string).toLocaleDateString([],options);
-   }
-
-  // var dateString = "2018-05-18T04:00:00.000Z"
-  // document.getElementById("results").innerHTML = formatDate(dateString);
 
   componentDidMount() {
     window.addEventListener("resize", () => {
@@ -83,17 +73,7 @@ class Calender extends Component {
           //onClick={console.log('inside click event')}
           //onSelectEvent={event => this.showDay}
           onSelectEvent={this.showDay}
-          //onSelectSlot={this.handleEventClick(event)}
-          //onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-         // onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-          //onSelectSlot={(event) => this.handleEventClick(this.formatDate(event.slots))}
-          onSelectSlot={(event) => this.handleEventClick(event.slots)}
-
-          // onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-         // onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-
-          //onSelectSlot={(event) => console.log(this.formatDate(event.slots))}
-         // onSelectSlot={(event) => this.setState({day: this.formatDate(event.slots)})}
+          onSelectSlot={this.handleEventClick}
           //eventPropGetter={(this.eventStyleGetter)}
         />
             {/* <BigCalendar
