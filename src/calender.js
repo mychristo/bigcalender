@@ -7,7 +7,7 @@ import BigCalendar from "react-big-calendar-like-google";
 import moment from "moment";
 import "react-big-calendar-like-google/lib/css/react-big-calendar.css";
 //import * as serviceWorker from './serviceWorker';
-//import CalDay from './calendermodal';
+import CalDay from './calendermodal';
 
 moment.locale("en");
 BigCalendar.momentLocalizer(moment);
