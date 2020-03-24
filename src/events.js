@@ -6,9 +6,9 @@ export default [
       'end': new Date(2015, 3, 1)
     },
     {
-      'title': 'kris kraai gig',
+      'title': 'Music festival',
       'start': new Date(2015, 3, 7),
-      'end': new Date(2015, 4, 7)
+      'end': new Date(2015, 3, 9)
     },
   
     {

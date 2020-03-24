@@ -9,24 +9,6 @@ import "react-big-calendar-like-google/lib/css/react-big-calendar.css";
 //import * as serviceWorker from './serviceWorker';
 import Modal from "react-modal";
 
-import { DatePicker, RangeDatePicker } from "@y0c/react-datepicker";
-// import calendar style
-// You can customize style by copying asset folder.
-import "@y0c/react-datepicker/assets/styles/calendar.scss";
-
-// Please include the locale you want to use.
-// and delivery props to calendar component
-import "dayjs/locale/ko";
-import "dayjs/locale/en";
-//import "./styles.css";
-
-const Panel = ({ header, children }) => (
-  <div style={{ height: "300px" }}>
-    <h1>{header}</h1>
-    <div>{children}</div>
-  </div>
-);
-
 moment.locale("en");
 BigCalendar.momentLocalizer(moment);
 //https://stackoverflow.com/questions/53897005/reactjs-bigcalendar-adding-event
@@ -139,8 +121,6 @@ class Calender extends Component {
   }
 
   render() {
-    const onChange = title => (...args) => console.log(title, args);
-
     return (
       <div style={{ height: 700 }}>
 
@@ -194,13 +174,7 @@ class Calender extends Component {
               <td colspan='2'><button onClick={this.closeModal}>close</button></td>
             </tr>
           </table>
-          <Panel header="DatePicker Include Time">
-            <DatePicker
-              includeTime
-              showToday
-              onChange={onChange("DatePicker include time")}
-            />
-          </Panel>
+
         </Modal>
 
             {/* <BigCalendar
